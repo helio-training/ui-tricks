@@ -1,0 +1,17 @@
+.card-box{
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.card{
+    text-align: center;
+    border: lightblue 1px solid;
+    border-radius: 2%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 20px;
+}
+
+.card img{
+    width: 20vw;
+}
+

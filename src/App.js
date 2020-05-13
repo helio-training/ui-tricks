@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Home from './pages/Home';
+import Pokemon from './pages/Pokemon';
+import Accounts from './pages/Accounts';
+import { PokemonContext } from './context/poke-context';
+import data from './context/pokemon.json'
 import './App.css';
 
 function App() {
+  const { Provider } = PokemonContext;
+  const [pokemon, setPokemon] = useState(data.pokemon);
+  const removePokemon = (index) => {
+    const copyPoke = Object.assign([], pokemon);
+    copyPoke.splice(index, 1);
+    setPokemon(copyPoke);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider value={{pokemon, removePokemon}}>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/pokemon' component={Pokemon} />
+          <Route exact path='/accounts' component={Accounts} />
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
